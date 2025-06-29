@@ -1,7 +1,7 @@
 class StringCalculator
     
-    def add input
-       parse_string_numbers(input).sum
+    def add(string)
+       parse_string_numbers(string).sum
     end
     
     
@@ -10,6 +10,19 @@ class StringCalculator
     def parse_string_numbers(string)
         return [] if string.empty?
         
-        string.split(/,|\n/).map(&:to_i)
+        delimeter, number_string = extract_delimeter(string)
+        
+        number_string.split(delimeter).map(&:to_i)
+    end
+    
+    def extract_delimeter(string)
+        delimeters = [",", "\n"] 
+        
+        if string.start_with?("//")
+            delimeter, number_string = string.split("\n", 2)
+            return [Regexp.new(delimeter[2..-1]), number_string]
+        else
+            return[Regexp.new(",|\n"), string]
+        end
     end
 end

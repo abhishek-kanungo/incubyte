@@ -41,5 +41,19 @@ RSpec.describe StringCalculator do
             end
         end
         
+        context "custom delimeter" do
+            context "when single character delimeter is passed" do
+                it "uses custom delimeter to split the string and return sum as integer" do
+                    expect(calculator.add("//;\n1;2")).to eq(3)
+                end
+            end
+            
+             context "when multi character delimeter is passed" do
+                it "uses custom delimeter to split the string and return sum as integer" do
+                    expect(calculator.add("//[***]\n1***2***3")).to eq(6)
+                end
+            end
+        end
+        
     end
 end
