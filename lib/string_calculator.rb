@@ -1,7 +1,8 @@
 class StringCalculator
     
     def add(string)
-       parse_string_numbers(string).sum
+        numbers_array = parse_string_numbers(string)
+        detect_negatives(numbers_array).sum
     end
     
     
@@ -24,5 +25,13 @@ class StringCalculator
         else
             return[Regexp.new(",|\n"), string]
         end
+    end
+    
+    def detect_negatives(numbers_array)
+        negatives = numbers_array.select(&:negative?)
+        
+        return numbers_array if negatives.empty?
+        
+        raise ArgumentError, "negative numbers not allowed #{negatives.join(',')}"
     end
 end
