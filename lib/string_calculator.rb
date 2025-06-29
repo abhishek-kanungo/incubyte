@@ -13,7 +13,7 @@ class StringCalculator
         
         delimeter, number_string = extract_delimeter(string)
         
-        number_string.split(delimeter).map(&:to_i)
+        number_string.split(delimeter).map(&:to_i).reject { |n| n > 1000 }
     end
     
     def extract_delimeter(string)
